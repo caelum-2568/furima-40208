@@ -44,12 +44,12 @@
 ## addresses テーブル
 |Column                            |Type             |Options                           |
 |----------------------------------|-----------------|----------------------------------|
-|user_item                         |references       |null: false, foreign_key: true    |
-|post_code  # 郵便番号               |string           |null: false                      |
+|users_item                        |references       |null: false, foreign_key: true    |
+|post_code  # 郵便番号              |string           |null: false                       |
 |prefecture_id # 都道府県           |integer          |null: false                       |
 |municipalities  # 市町村           |string           |null: false                       |
 |street_address  # 番地             |string           |null: false                       |
-|building_name  # 建物名            |string             |                                  |
+|building_name  # 建物名            |string           |                                  |
 |telephone_number  # 電話番号        |string           |null: false                      |
 ### Association
 - belongs_to :uses_item  # uses_items テーブルとのアソシエーション
