@@ -4,7 +4,7 @@
 |Column                           |Type             |Options                           |
 |---------------------------------|-----------------|----------------------------------|
 |nickname                         |string           |null: false                       |
-|email                            |string           |null: false , unique :true        |
+|email                            |string           |null: false , unique: true        |
 |encrypted_password               |string           |null: false                       |
 |last_name  # 苗字                 |string           |null: false                       |
 |first_name  # 名前                |string           |null: false                       |
