@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include "Email can't be blank"
       end
-      it 'emailが重複していると保存できない' do
+      it 'emailが重複していると登録できない' do
         @user.save
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
@@ -29,17 +29,35 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include "Password can't be blank"
       end
-      it 'passwordが5文字以下だと保存できない' do
+      it 'passwordが5文字以下では登録できない' do
         @user.password = 'ab123'
         @user.password_confirmation = 'ab123'
         @user.valid?
         expect(@user.errors.full_messages).to include "Password is too short (minimum is 6 characters)"
       end
-      it 'passwordが半角英数字でないと保存できない' do
+      it 'passwordが英字のみでは登録できない' do
+        @user.password = 'abcdef'
+        @user.password_confirmation = 'abcdef'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Password は半角英数字混合で入力してください"
+      end
+      it 'passwordが数字のみでは登録できない' do
         @user.password = '123456'
         @user.password_confirmation = '123456'
         @user.valid?
         expect(@user.errors.full_messages).to include "Password は半角英数字混合で入力してください"
+      end
+      it 'passwordが全角文字を含むと登録できない' do
+        @user.password = 'ａｂｃ１２３'
+        @user.password_confirmation = 'ａｂｃ１２３'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Password は半角英数字混合で入力してください"
+      end
+      it 'passwordが不一致だと登録できない' do
+        @user.password = 'abc123'
+        @user.password_confirmation = '123abc'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password"
       end
       it 'first_nameが空では登録できない' do
         @user.first_name = ''
