@@ -16,7 +16,6 @@ class Item < ApplicationRecord
  
   # バリデーション
   with_options presence: true do
-    validates :user_id
     validates :image
     validates :item_name
     validates :explanation 
@@ -25,7 +24,7 @@ class Item < ApplicationRecord
     validates :postage_id
     validates :date_of_shipment_id
     validates :prefecture_id
-    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, only_integer: true }
   end
 
   # ジャンルの選択が「--」の時は保存不可
