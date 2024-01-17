@@ -84,3 +84,8 @@ group :production do
 end
 
 gem 'devise'
+
+gem 'image_processing', '~> 1.2' # 画像処理用のgem
+gem 'rails', '~> 7.0.0'
+
+gem 'active_hash'
