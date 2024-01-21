@@ -48,3 +48,6 @@ gem 'devise'
 gem 'image_processing', '~> 1.2' # 画像処理用のgem
 gem 'active_hash'
 gem 'ruby-vips'
+
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'

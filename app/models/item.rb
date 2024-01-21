@@ -11,8 +11,8 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :postage
   belongs_to :prefecture
-  belongs_to :product_condition
-  belongs_to :shipping_day
+  belongs_to :grade
+  belongs_to :date_of_shipment
  
   # バリデーション
   with_options presence: true do
