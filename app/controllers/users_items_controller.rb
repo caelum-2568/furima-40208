@@ -4,13 +4,11 @@ class UsersItemsController < ApplicationController
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @item = Item.find(params[:item_id])
     @purchase_record = PurchaseRecord.new
     render 'orders/index'
   end  
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_record = PurchaseRecord.new(users_items_params)
   
     if @purchase_record.valid?

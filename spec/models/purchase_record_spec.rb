@@ -12,11 +12,20 @@ RSpec.describe PurchaseRecord, type: :model do
     end
 
     context '購入情報の保存できない時' do
+      it 'user_idが空だと保存できない' do
+        @purchase_record.user_id = ""
+        @purchase_record.valid?
+        expect(@purchase_record.errors[:user_id]).to include "can't be blank"
+      end
+      it 'item_idが空だと保存できない' do
+        @purchase_record.item_id = ""
+        @purchase_record.valid?
+        expect(@purchase_record.errors[:item_id]).to include "can't be blank"
+      end
       it 'post_codeが空だと保存できない' do
         @purchase_record.post_code = ""
         @purchase_record.valid?
-        expect(@purchase_record.errors[:post_code]).to include "can't be blank"
-        expect(@purchase_record.errors[:post_code]).to include "is invalid. Include hyphen(-)"
+        expect(@purchase_record.errors[:post_code]).to include "can't be blank", "is invalid. Include hyphen(-)"
       end
       it 'post_codeにハイフンがないと保存できない' do
         @purchase_record.post_code = "12345678"
@@ -28,8 +37,8 @@ RSpec.describe PurchaseRecord, type: :model do
         @purchase_record.valid?
         expect(@purchase_record.errors.full_messages).to include "Post code is invalid. Include hyphen(-)"
       end
-      it 'prefecture_idが空だと保存できない' do
-        @purchase_record.prefecture_id = ""
+      it 'prefecture_id--だと保存できない' do
+        @purchase_record.prefecture_id = 0
         @purchase_record.valid?
         expect(@purchase_record.errors.full_messages).to include "Prefecture can't be blank"
       end
@@ -48,8 +57,18 @@ RSpec.describe PurchaseRecord, type: :model do
         @purchase_record.valid?
         expect(@purchase_record.errors.full_messages).to include "Telephone number can't be blank", "Telephone number is invalid"
       end
-      it 'telephone_numberが11桁でなければ保存できない' do
+      it 'telephone_numberが9桁以下では保存できない' do
+        @purchase_record.telephone_number = "080123456"
+        @purchase_record.valid?
+        expect(@purchase_record.errors.full_messages).to include "Telephone number is invalid"
+      end
+      it 'telephone_numberが12桁以上では保存できない' do
         @purchase_record.telephone_number = "080123456789"
+        @purchase_record.valid?
+        expect(@purchase_record.errors.full_messages).to include "Telephone number is invalid"
+      end
+      it 'telephone_numberが半角数字以外が含まれている場合では保存できない' do
+        @purchase_record.telephone_number = "abcdefghijk"
         @purchase_record.valid?
         expect(@purchase_record.errors.full_messages).to include "Telephone number is invalid"
       end
