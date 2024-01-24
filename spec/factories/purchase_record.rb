@@ -8,4 +8,10 @@ FactoryBot.define do
     telephone_number {'09012345678'} 
     token            {'tok_abcdefghijk00000000000000000'}
   end
+  trait :with_building_name do
+    building_name  {'ビル名'}
+  end
+  trait :without_building_name do
+    building_name  {''}
+  end
 end

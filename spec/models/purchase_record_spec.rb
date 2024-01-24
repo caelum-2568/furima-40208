@@ -12,6 +12,14 @@ RSpec.describe PurchaseRecord, type: :model do
       it '正常に登録できること' do
         expect(@purchase_record).to be_valid
       end
+      it 'building_nameがある場合、正常に登録できること' do
+        purchase_record_with_building = FactoryBot.build(:purchase_record, :with_building_name, user_id: @user.id, item_id: @item.id)
+        expect(purchase_record_with_building).to be_valid
+      end
+      it 'building_nameがない場合でも、正常に登録できること' do
+        purchase_record_without_building = FactoryBot.build(:purchase_record, :without_building_name, user_id: @user.id, item_id: @item.id)
+        expect(purchase_record_without_building).to be_valid
+      end
     end
 
     context '購入情報の保存できない時' do
