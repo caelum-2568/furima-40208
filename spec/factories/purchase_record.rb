@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :purchase_record do
-    user_id          { create(:user).id }
-    item_id          { create(:item).id }
     post_code        {'123-4567'}
     prefecture_id    {3}
     municipalities   {'港区'}

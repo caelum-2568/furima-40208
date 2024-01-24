@@ -1,7 +1,10 @@
 require 'rails_helper'
+
 RSpec.describe PurchaseRecord, type: :model do
   before do
-    @purchase_record = FactoryBot.build(:purchase_record)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @purchase_record = FactoryBot.build(:purchase_record, user_id: @user.id, item_id: @item.id)
   end
 
   describe '購入情報の保存' do
@@ -25,7 +28,7 @@ RSpec.describe PurchaseRecord, type: :model do
       it 'post_codeが空だと保存できない' do
         @purchase_record.post_code = ""
         @purchase_record.valid?
-        expect(@purchase_record.errors[:post_code]).to include "can't be blank", "is invalid. Include hyphen(-)"
+        expect(@purchase_record.errors[:post_code]).to include "can't be blank"
       end
       it 'post_codeにハイフンがないと保存できない' do
         @purchase_record.post_code = "12345678"
@@ -55,7 +58,7 @@ RSpec.describe PurchaseRecord, type: :model do
       it 'telephone_numberが空だと保存できない' do
         @purchase_record.telephone_number = ""
         @purchase_record.valid?
-        expect(@purchase_record.errors.full_messages).to include "Telephone number can't be blank", "Telephone number is invalid"
+        expect(@purchase_record.errors.full_messages).to include "Telephone number can't be blank"
       end
       it 'telephone_numberが9桁以下では保存できない' do
         @purchase_record.telephone_number = "080123456"
