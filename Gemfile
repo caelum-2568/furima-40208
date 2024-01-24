@@ -50,4 +50,6 @@ gem 'active_hash'
 gem 'ruby-vips'
 
 gem 'mini_magick'
-gem 'image_processing', '~> 1.2'
+gem 'pry-rails'
+gem 'gon'
+gem 'payjp'

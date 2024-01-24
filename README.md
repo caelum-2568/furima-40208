@@ -12,8 +12,8 @@
 |sending_kana_for_last_name       |string           |null: false                       |
 |date_of_birth                    |date             |null: false                       |
 ### Association
-- has_many :uses_items  # uses_items テーブルとのアソシエーション
-- has_many :items # items テーブルとのアソシエーション
+- has_many :user_item  # users_items テーブルとのアソシエーション
+- has_many :item # items テーブルとのアソシエーション
 
 ## items テーブル
 |Column                            |Type             |Options                           |
@@ -28,10 +28,10 @@
 |prefecture_id  # 発送地域          |integer          |null: false                       |
 |price                             |integer          |null: false                       |
 ### Association
-- has_one :uses_item  # uses_items テーブルとのアソシエーション
+- has_one :user_item  # users_items テーブルとのアソシエーション
 - belongs_to :user  # users テーブルとのアソシエーション
 
-## uses_items テーブル
+## users_items テーブル
 |Column                           |Type             |Options                           |
 |---------------------------------|-----------------|----------------------------------|
 |user                             |references       |null: false, foreign_key: true    |
@@ -44,7 +44,7 @@
 ## addresses テーブル
 |Column                            |Type             |Options                           |
 |----------------------------------|-----------------|----------------------------------|
-|users_item                        |references       |null: false, foreign_key: true    |
+|user_item                        |references       |null: false, foreign_key: true    |
 |post_code  # 郵便番号              |string           |null: false                       |
 |prefecture_id # 都道府県           |integer          |null: false                       |
 |municipalities  # 市町村           |string           |null: false                       |
@@ -52,5 +52,5 @@
 |building_name  # 建物名            |string           |                                  |
 |telephone_number  # 電話番号        |string           |null: false                      |
 ### Association
-- belongs_to :uses_item  # uses_items テーブルとのアソシエーション
+- belongs_to :user_item  # users_items テーブルとのアソシエーション
 

@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   # テーブルとのアソシエーション
+  has_one :user_item
   belongs_to :user
 
   # active_storageとのアソシエーション
