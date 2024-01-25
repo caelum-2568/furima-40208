@@ -1,6 +1,7 @@
 class PurchaseRecord
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number, :token
+  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipalities, :street_address, :building_name,
+                :telephone_number, :token
 
   with_options presence: true do
     validates :user_id
@@ -15,11 +16,12 @@ class PurchaseRecord
 
   def save
     ActiveRecord::Base.transaction do
-      user_item = UserItem.create!(user_id: user_id, item_id: item_id)
-      Address.create!(post_code: post_code, prefecture_id: prefecture_id, municipalities: municipalities, street_address: street_address, building_name: building_name, telephone_number: telephone_number, user_item_id: user_item.id)
+      user_item = UserItem.create(user_id:, item_id:)
+      Address.create(post_code:, prefecture_id:, municipalities:,
+                     street_address:, building_name:, telephone_number:, user_item_id: user_item.id)
       true
     end
   rescue ActiveRecord::RecordInvalid
     false
-  end    
+  end
 end

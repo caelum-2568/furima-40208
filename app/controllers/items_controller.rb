@@ -33,22 +33,21 @@ class ItemsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
-  
 
-    def destroy
-      if @item.user_id == current_user.id
-        @item.destroy
-        redirect_to root_path, notice: '商品が削除されました。'
-      else
-        redirect_to item_path(@item), alert: '削除権限がありません。'
-      end
+  def destroy
+    if @item.user_id == current_user.id
+      @item.destroy
+      redirect_to root_path, notice: '商品が削除されました。'
+    else
+      redirect_to item_path(@item), alert: '削除権限がありません。'
     end
-
+  end
 
   private
 
   def item_params
-    params.require(:item).permit(:image, :item_name, :explanation, :category_id, :grade_id, :postage_id, :date_of_shipment_id, :prefecture_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :item_name, :explanation, :category_id, :grade_id, :postage_id, :date_of_shipment_id,
+                                 :prefecture_id, :price).merge(user_id: current_user.id)
   end
 
   def set_item
