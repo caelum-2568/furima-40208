@@ -12,7 +12,7 @@ const post = () => {
         const saleProfit = inputValue - taxPrice;
         
         addTaxPrice.textContent = Math.floor(taxPrice); // 切り捨て
-        profit.textContent = Math.floor(saleProfit); // 切り捨て
+        profit.textContent = Math.floor(inputValue - Math.floor(taxPrice)); // 利益を計算後に切り捨て
       }
     });
   }
