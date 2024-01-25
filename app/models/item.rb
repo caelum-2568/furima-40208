@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   # テーブルとのアソシエーション
+  has_one :user_item
   belongs_to :user
 
   # active_storageとのアソシエーション
@@ -13,12 +14,12 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :grade
   belongs_to :date_of_shipment
- 
+
   # バリデーション
   with_options presence: true do
     validates :image
     validates :item_name
-    validates :explanation 
+    validates :explanation
     validates :category_id
     validates :grade_id
     validates :postage_id
